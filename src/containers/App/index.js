@@ -23,6 +23,16 @@ class App extends Component {
       open: false
     };
   }
+  openTask = () => {
+    this.setState({
+      open: true
+    });
+  }
+  handleClose = () => {
+   this.setState({
+      open: false
+    }); 
+  }
   render() {
     var { classes } = this.props;
     var {open} = this.state;
@@ -30,7 +40,7 @@ class App extends Component {
       <React.Fragment>
         <Container maxWidth="lg">
           <div className="App">
-            <Button variant="contained" color="primary"><AddIcon/>&nbsp;Thêm công việc mới</Button>
+            <Button variant="contained" color="primary" onClick={this.openTask}><AddIcon/>&nbsp;Thêm công việc mới</Button>
             <Box component="div" mt={2}>
               <Grid container className={classes.root} spacing={1}>
                 <Grid item md={4}>
@@ -133,8 +143,8 @@ class App extends Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button variant="contained" autoFocus color="secondary">Cancel</Button>
-            <Button variant="contained" autoFocus color="primary">Ok</Button>
+            <Button variant="contained" autoFocus color="secondary" onClick={this.handleClose}>Cancel</Button>
+            <Button variant="contained" autoFocus color="primary" onClick={this.handleClose}>Ok</Button>
           </DialogActions>
         </Dialog>
       </React.Fragment>
