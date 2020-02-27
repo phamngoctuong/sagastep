@@ -9,6 +9,8 @@ import TaskBoard from '../TaskBoard';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
+import configureStore from '../../redux/configureStore';
+configureStore();
 class App extends Component {
   constructor(props) {
     super(props);

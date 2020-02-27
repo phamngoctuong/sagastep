@@ -11,8 +11,6 @@ class TaskList extends Component {
 			<Box component="div" mt={2}>
         <Grid container className={classes.root} spacing={1}>
         	<TaskItem />
-        	<TaskItem />
-        	<TaskItem />
         </Grid>
       </Box>
 		);
