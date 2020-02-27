@@ -5,10 +5,18 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import TaskList from '../../components/TaskList';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as taskActions from './../../actions/task';
 class TaskBoard extends Component {
 	openTask = () => {
 		this.props.openTask()
 	}
+	componentDidMount() {
+    const { taskActionCreators } = this.props;
+    const { fetchListTask } = taskActionCreators;
+    fetchListTask();
+  }
   render() {
     return (
       <Container maxWidth="lg">
@@ -20,4 +28,14 @@ class TaskBoard extends Component {
     );
   }
 }
-export default withStyles(styles)(TaskBoard);
+const mapStateToProps = state => {
+  return {
+    listTask: state.task.listTask,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    taskActionCreators: bindActionCreators(taskActions, dispatch)
+  };
+};
+export default withStyles(styles)(connect(mapStateToProps,mapDispatchToProps)(TaskBoard));

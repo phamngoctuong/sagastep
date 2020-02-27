@@ -10,7 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import configureStore from '../../redux/configureStore';
-configureStore();
+import { Provider } from 'react-redux';
+var store = configureStore();
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,26 +34,28 @@ class App extends Component {
     var {open} = this.state;
     return (
       <React.Fragment>
-        <TaskBoard openTask = {this.openTask}/>
-        <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={open}>
-          <DialogTitle id="customized-dialog-title">
-            Thêm công việc mới
-          </DialogTitle>
-          <DialogContent dividers>
-            <Grid container>
-              <Grid item lg={12}>
-                <TextField id="standard-helperText" fullWidth label="Name" className={classes.textfield} />
+        <Provider store={store}>
+          <TaskBoard openTask = {this.openTask}/>
+          <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={open}>
+            <DialogTitle id="customized-dialog-title">
+              Thêm công việc mới
+            </DialogTitle>
+            <DialogContent dividers>
+              <Grid container>
+                <Grid item lg={12}>
+                  <TextField id="standard-helperText" fullWidth label="Name" className={classes.textfield} />
+                </Grid>
+                <Grid item lg={12}>
+                  <TextField id="standard-multiline-flexible" fullWidth className={classes.textfield} label="Multiline" multiline rowsMax="4"/>
+                </Grid>
               </Grid>
-              <Grid item lg={12}>
-                <TextField id="standard-multiline-flexible" fullWidth className={classes.textfield} label="Multiline" multiline rowsMax="4"/>
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" autoFocus color="secondary" onClick={this.handleClose}>Cancel</Button>
-            <Button variant="contained" autoFocus color="primary" onClick={this.handleClose}>Ok</Button>
-          </DialogActions>
-        </Dialog>
+            </DialogContent>
+            <DialogActions>
+              <Button variant="contained" autoFocus color="secondary" onClick={this.handleClose}>Cancel</Button>
+              <Button variant="contained" autoFocus color="primary" onClick={this.handleClose}>Ok</Button>
+            </DialogActions>
+          </Dialog>
+        </Provider>
       </React.Fragment>
     );
   }

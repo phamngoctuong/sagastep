@@ -10,6 +10,13 @@ var task = (state = initialState, action) => {
 				listTask: []
 			}
   	}
+  	case taskConstants.FETCH_TASK_SUCCESS : {
+  		var {data} = action.payload;
+			return {
+				...state,
+				listTask: data
+			}
+  	}
   	default:
   		return state;
   }
